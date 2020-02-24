@@ -10,14 +10,13 @@ function showError(input, message) {
     formControl.className = 'form-control error';
     const small = formControl.querySelector('small');
     small.innerText = message;
-}
+};
 
 // show success outline
 function showSuccess(input, message) {
     const formControl = input.parentElement;
-    formControl.className = 'form-control success';
-    
-}
+    formControl.className = 'form-control success';    
+};
 
 // check email is valid
 function checkEmail(input) {
@@ -26,8 +25,8 @@ function checkEmail(input) {
         showSuccess(input);
     } else {
         showError(input, 'Email is not valid');
-    }
-}
+    };
+};
 
 // Check required fields
 function checkRequired(inputArr) {
@@ -36,9 +35,9 @@ function checkRequired(inputArr) {
             showError(input, `${getFieldName(input)} is required`);
         } else {
             showSuccess(input);
-        }
-    })
-}
+        };
+    });
+};
 
 // Check input length
 function checkLength(input, min, max) {
@@ -48,13 +47,20 @@ function checkLength(input, min, max) {
         showError(input, `${getFieldName(input)} mut be less than ${max} characters`);
     } else {
         showSuccess(input);
-    }
-}
+    };
+};
+
+// Check passwords match
+function checkPasswordsMatch(input1, input2) {
+    if(input1.value !== input2.value) {
+        showError(input2, 'Passwords do not match');
+    };
+};
 
 // Get fieldname
 function getFieldName(input) {
     return input.id.charAt(0).toUppercase() + input.id.slice(1);
-}
+};
 
 // Event listener
 form.addEventListener('submit', function(e) {
@@ -64,4 +70,5 @@ form.addEventListener('submit', function(e) {
     checkLength(username, 3, 15);
     checkLength(password, 6, 25); 
     checkEmail(email); 
+    checkPasswordsMatch(password, password2);
 });
